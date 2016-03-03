@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//src/net/sf/freecol/common/model/AddToRef.java=Cp1252
+encoding//src/net/sf/freecol/common/model/DeclarePeace.java=Cp1252
+encoding//src/net/sf/freecol/common/model/DeclareWar.java=Cp1252
+encoding//src/net/sf/freecol/common/model/Displeasure.java=Cp1252
+encoding//src/net/sf/freecol/common/model/ForceTax.java=Cp1252
+encoding//src/net/sf/freecol/common/model/HessianMercenaries.java=Cp1252
+encoding//src/net/sf/freecol/common/model/LowerTaxOther.java=Cp1252
+encoding//src/net/sf/freecol/common/model/LowerTaxWar.java=Cp1252
+encoding//src/net/sf/freecol/common/model/MonachAction.java=Cp1252
+encoding//src/net/sf/freecol/common/model/MonarchMercenaries.java=Cp1252
+encoding//src/net/sf/freecol/common/model/NoAction.java=Cp1252
+encoding//src/net/sf/freecol/common/model/RaiseTaxAct.java=Cp1252
+encoding//src/net/sf/freecol/common/model/RaiseTaxWar.java=Cp1252
+encoding//src/net/sf/freecol/common/model/SupportLand.java=Cp1252
+encoding//src/net/sf/freecol/common/model/SupportSea.java=Cp1252
+encoding//src/net/sf/freecol/common/model/WaiveTax.java=Cp1252

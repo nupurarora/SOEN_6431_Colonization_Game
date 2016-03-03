@@ -507,7 +507,7 @@ public final class Monarch extends FreeColGameObject implements Named {
      *
      * @return The maximum tax rate in the game.
      */
-    private int taxMaximum() {
+    public int taxMaximum() {
         return getSpecification().getInteger(GameOptions.MAXIMUM_TAX);
     }
 
@@ -596,36 +596,7 @@ public final class Monarch extends FreeColGameObject implements Named {
     public boolean actionIsValid(MonarchAction action) {
         initializeCaches();
 
-        switch (action) {
-        case NO_ACTION:
-            return true;
-        case RAISE_TAX_ACT: case RAISE_TAX_WAR:
-            return player.getTax() < taxMaximum();
-        case FORCE_TAX:
-            return false;
-        case LOWER_TAX_WAR: case LOWER_TAX_OTHER:
-            return player.getTax() > MINIMUM_TAX_RATE + 10;
-        case WAIVE_TAX:
-            return true;
-        case ADD_TO_REF:
-            return !(navalREFUnitTypes.isEmpty() || landREFUnitTypes.isEmpty());
-        case DECLARE_PEACE:
-            return !collectPotentialFriends().isEmpty();
-        case DECLARE_WAR:
-            return !collectPotentialEnemies().isEmpty();
-        case SUPPORT_SEA:
-            return player.getAttackedByPrivateers() && !getSupportSea()
-                && !getDispleasure();
-        case SUPPORT_LAND: case MONARCH_MERCENARIES:
-            return player.isAtWar() && !getDispleasure();
-        case HESSIAN_MERCENARIES:
-            return player.checkGold(HESSIAN_MINIMUM_PRICE);
-        case DISPLEASURE:
-            return false;
-        default:
-            throw new IllegalArgumentException("Bogus monarch action: "
-                                               + action);
-        }
+        return getMonachActionObject(action).actionIsValid(action, this);
     }
 
     /**
@@ -1178,4 +1149,52 @@ public final class Monarch extends FreeColGameObject implements Named {
     public static String getXMLElementTagName() {
         return "monarch";
     }
+
+	private MonachAction getMonachActionObject(MonarchAction action) {
+		switch (action) {
+		case NO_ACTION:
+			return new NoAction();
+		case RAISE_TAX_ACT:
+			return new RaiseTaxAct();
+		case RAISE_TAX_WAR:
+			return new RaiseTaxWar();
+		case FORCE_TAX:
+			return new ForceTax();
+		case LOWER_TAX_WAR:
+			return new LowerTaxWar();
+		case LOWER_TAX_OTHER:
+			return new LowerTaxOther();
+		case WAIVE_TAX:
+			return new WaiveTax();
+		case ADD_TO_REF:
+			return new AddToRef();
+		case DECLARE_PEACE:
+			return new DeclarePeace();
+		case DECLARE_WAR:
+			return new DeclareWar();
+		case SUPPORT_SEA:
+			return new SupportSea();
+		case SUPPORT_LAND:
+			return new SupportLand();
+		case MONARCH_MERCENARIES:
+			return new MonarchMercenaries();
+		case HESSIAN_MERCENARIES:
+			return new HessianMercenaries();
+		case DISPLEASURE:
+			return new Displeasure();
+		}
+		return null;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public List<UnitType> getNavalREFUnitTypes() {
+		return navalREFUnitTypes;
+	}
+
+	public List<UnitType> getLandREFUnitTypes() {
+		return landREFUnitTypes;
+	}
 }
